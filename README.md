@@ -8,4 +8,4 @@ Web-based flight comparison platform with AI recommendations
 - User-friendly interface
 
 ## Live Demo
-[View Live](https://YOUR-USERNAME.github.io/AeroFinder)
+[View Live](https://ahmadsardar.github.io/Aerofinder/)
