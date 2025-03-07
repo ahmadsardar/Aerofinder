@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeroFinder - Search</title>
+</head>
+
+<body>
+  <header>
+    <h1>AeroFinder</h1>
+    <nav>
+        <div>
+          <a href="index.html">Home</a> |
+          <a href="chatbot.html">Assistant</a> |
+          <a href="about.html">About</a>
+        </div>
+      </nav>
+  </header>
+
+  <main>
+    <h2>Search Results</h2>
+    <form action="filter.html" method="get">
+      <label for="sort">Sort By:</label>
+      <select id="sort" name="sort">
+        <option value="price">Price (Low to High)</option>
+        <option value="duration">Duration (Shortest to Longest)</option>
+      </select>
+
+      <label for="connections">Filter by Connections:</label>
+      <select id="connections" name="connections">
+        <option value="0">Non-stop</option>
+        <option value="1">1 Connection</option>
+        <option value="2">2 Connections</option>
+        <option value="3">2+ Connections</option>
+      </select>
+
+      <label for="airline">Filter by Airline:</label>
+      <select id="airline" name="airline">
+        <option value="all">All Airlines</option>
+        <option value="airline1">Airline 1</option>
+        <option value="airline2">Airline 2</option>
+      </select>
+
+      <button type="submit">Apply Filters</button>
+    </form>
+
+    <section>
+      <h3>Flights from [Location] to [Destination]</h3>
+      <ul>
+        <li>
+          <h4>Flight 1</h4>
+          <p>Price: $200</p>
+          <p>Duration: 2h 30m</p>
+          <p>Airline: Airline 1</p>
+          <p>Connections: 0</p>
+          <a href="details.html">View Details</a>
+        </li>
+        <li>
+          <h4>Flight 2</h4>
+          <p>Price: $250</p>
+          <p>Duration: 3h 00m</p>
+          <p>Airline: Airline 2</p>
+          <p>Connections: 1</p>
+          <a href="details.html">View Details</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <nav>
+      <div>
+        <a href="faq.html">FAQ</a> &nbsp;|&nbsp;
+        <a href="privacy.html">Privacy</a>
+      </div>
+      <p>© 2025 AeroFinder. All rights reserved.</p>
+    </nav>
+  </footer>
+</body>
+
+</html>
