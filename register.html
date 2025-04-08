@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AeroFinder - FAQs</title>
+    <title>AeroFinder - Register</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -18,7 +18,8 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="search.html">Search Flights</a></li>
-                <li><a href="chatbot.html">Travel Assistant</a></li>
+                <li><a href="filter.html">Flight Results</a></li>
+                <li><a href="chatbot.html">Chatbot</a></li>
                 <div class="auth-buttons">
                     <a href="register.html" class="btn btn-outline">Register</a>
                     <a href="login.html" class="btn btn-primary">Login</a>
@@ -28,34 +29,27 @@
     </header>
 
     <main>
-        <div class="faq-container">
-            <h2>Frequently Asked Questions</h2>
-
-            <div class="faq-item">
-                <h3>1. How does AeroFinder get flight data?</h3>
-                <p>We use APIs like Amadeus and Skyscanner to ensure real-time, accurate flight information.</p>
+        <h2>Create an Account</h2>
+        <form action="dashboard.html" method="post">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
             </div>
-
-            <div class="faq-item">
-                <h3>2. Are the chatbot recommendations reliable?</h3>
-                <p>Yes! Our OpenAI-powered chatbot analyzes your preferences to suggest tailored destinations.</p>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
             </div>
-
-            <div class="faq-item">
-                <h3>3. Can I filter by airline?</h3>
-                <p>Absolutely. Use the "Filter by Airline" dropdown on search results.</p>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
             </div>
-
-            <div class="faq-item">
-                <h3>4. Is my payment information safe?</h3>
-                <p>We don't store payment details. All transactions are handled by secure third-party providers.</p>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
             </div>
-
-            <div class="faq-item">
-                <h3>5. How do I contact support?</h3>
-                <p>Email us at support@aerofinder.com or use the chatbot for quick queries.</p>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
     </main>
 
     <footer>

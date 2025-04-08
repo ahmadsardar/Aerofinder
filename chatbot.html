@@ -2,79 +2,96 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AeroFinder - Chatbot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroFinder - Travel Assistant</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header>
-    <h1>AeroFinder</h1>
-    <nav>
-        <div>
-          <a href="index.html">Home</a> |
-          <a href="chatbot.html">Assistant</a> |
-          <a href="about.html">About</a>
+    <header>
+        <div class="header-brand">
+            <img src="images/logo.png" alt="AeroFinder Logo" class="nav-logo">
+            <h1>AeroFinder</h1>
         </div>
-      </nav>
-  </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="search.html">Search Flights</a></li>
+                <li><a href="chatbot.html">Travel Assistant</a></li>
+                <div class="auth-buttons">
+                    <a href="register.html" class="btn btn-outline">Register</a>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-    <h2>AI Travel Assistant</h2>
-    
-    <section>
-      <h3>Let's Find Your Perfect Trip! ✈️</h3>
-      <div style="border: 1px solid #ccc; padding: 1rem; min-height: 200px;">
-        <div>
-          <p><strong>AeroBot:</strong> Hi! I'm your travel assistant. Tell me your preferences (budget, dates, interests) and I'll suggest destinations and flights!</p>
+    <main>
+        <h2>Travel Assistant</h2>
+        <div class="chat-container">
+            <h3>How can I help with your travel plans today?</h3>
+            <p>Choose an option below or ask your question:</p>
+
+            <div class="chat-options">
+                <div class="chat-option" onclick="showResponse('baggage')">Baggage Policies</div>
+                <div class="chat-option" onclick="showResponse('visa')">Visa Requirements</div>
+                <div class="chat-option" onclick="showResponse('buy-wait')">Buy Now or Wait?</div>
+                <div class="chat-option" onclick="showResponse('prices')">Price Trends</div>
+            </div>
+
+            <form>
+                <label for="question">Or ask your question:</label>
+                <textarea id="question" name="question" rows="3"
+                    placeholder="Type your travel question here..."></textarea>
+                <button type="submit" class="btn btn-primary">Ask</button>
+            </form>
+
+            <div id="baggage-response" class="chat-response">
+                <h4>Baggage Policies</h4>
+                <p>Most airlines allow 1 cabin bag (max 7kg) and 1 checked bag (typically 23kg) for international
+                    flights. Budget airlines may charge extra. Always check with your specific airline for exact limits.
+                </p>
+            </div>
+
+            <div id="visa-response" class="chat-response">
+                <h4>Visa Requirements</h4>
+                <p>Visa requirements vary by destination and nationality. For US citizens, popular destinations like
+                    Europe (ETIAS coming 2025), UK, and Japan typically allow visa-free stays for tourism. Always verify
+                    with official government sources.</p>
+            </div>
+
+            <div id="buy-wait-response" class="chat-response">
+                <h4>Buy Now or Wait?</h4>
+                <div class="buy-advice">
+                    <p>Our recommendation for your selected flight:</p>
+                    <p><strong>Book Now</strong> - Prices are currently 15% below average for this route and expected to
+                        rise.</p>
+                </div>
+            </div>
+
+            <div id="prices-response" class="chat-response">
+                <h4>Price Trends for Your Route</h4>
+                <div class="price-history-chart">
+                    [Price History Chart - 3 Month Trend]
+                </div>
+                <p>Historical data shows prices typically drop 3-4 weeks before departure for this route, then rise
+                    sharply in the final 2 weeks.</p>
+            </div>
         </div>
+    </main>
 
-        <div>
-          <p><strong>You:</strong> I want a beach vacation under $800</p>
-          <p><strong>AeroBot:</strong> Great! How about Bali? Flights from $600. Or check Miami for $450!</p>
-        </div>
-      </div>
-
-      <form>
-        <div>
-          <button type="button">Beach Destinations</button>
-          <button type="button">Budget Travel</button>
-          <button type="button">Family-Friendly</button>
-        </div>
-
-        <label for="chat-input">Chat with AeroBot:</label>
-        <textarea 
-          id="chat-input" 
-          name="chat-input" 
-          rows="3"
-          placeholder="e.g., 'Cheapest flights to Europe in December'"
-        ></textarea>
-        
-        <button type="submit">Send</button>
-      </form>
-    </section>
-
-    <section>
-      <h3>Your Personalized Suggestions</h3>
-      <div>
-        <p>🔍 Based on your preferences, try these:</p>
-        <ul>
-          <li>Tokyo • Flights from $700 • Cultural Experience</li>
-          <li>Paris • Flights from $550 • Romantic Getaway</li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <nav>
-      <div>
-        <a href="faq.html">FAQ</a> &nbsp;|&nbsp;
-        <a href="privacy.html">Privacy</a>
-      </div>
-      <p>© 2025 AeroFinder. All rights reserved.</p>
-    </nav>
-  </footer>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <p>© 2025 AeroFinder. All rights reserved.</p>
+        </nav>
+    </footer>
 </body>
 
 </html>
