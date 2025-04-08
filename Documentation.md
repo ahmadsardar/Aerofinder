@@ -8,7 +8,7 @@ Here's the updated Documentation.md reflecting all recent changes:
 
 ### 1.1. Purpose and Goals
 The platform allows users to compare flights efficiently with enhanced features including:
-- **AI-powered recommendations** through the Travel Assistant
+- **AI-powered recommendations** through the Chatbot
 - **Price trend analysis** to help users find optimal booking times
 - **Unified design system** across all pages
 
@@ -38,7 +38,7 @@ The platform allows users to compare flights efficiently with enhanced features 
   - Consistent hover states
   - Improved mobile responsiveness
 
-### 2.3. Travel Assistant (Previously Chatbot)
+### 2.3. Chatbot (Previously Chatbot)
 - **Enhanced Features**:
   - Quick-select question options
   - "Buy Now or Wait" recommendations
@@ -118,7 +118,7 @@ The platform allows users to compare flights efficiently with enhanced features 
 
 Key changes from previous version:
 1. Removed all references to standalone Terms page
-2. Added documentation for new Travel Assistant features
+2. Added documentation for new Chatbot features
 3. Updated technology choices to reflect current implementation
 4. Added justification for design system changes
 5. Revised future enhancements to reflect completed work
