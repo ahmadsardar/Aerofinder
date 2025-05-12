@@ -13,8 +13,6 @@
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Custom Auth Script -->
-    <script src="js/auth.js"></script>
 </head>
 
 <body>
@@ -33,7 +31,7 @@
                 </ul>
             </div>
             <div class="nav-right auth-buttons">
-                <!-- Auth buttons will be dynamically updated -->
+                <!-- Auth buttons will be dynamically updated by auth.js -->
             </div>
         </nav>
     </header>
@@ -41,55 +39,38 @@
         <div class="chatbot-card">
             <div class="chatbot-card-header">
                 <h3>How can I help with your travel plans today?</h3>
-                <p>Choose an option below or ask your question:</p>
+                <p>Ask me anything about flights, airlines, or travel requirements!</p>
             </div>
-            <div class="chatbot-options-row">
-                <button class="chatbot-option-btn" onclick="showResponse('baggage')">Baggage Policies</button>
-                <button class="chatbot-option-btn" onclick="showResponse('visa')">Visa Requirements</button>
-                <button class="chatbot-option-btn" onclick="showResponse('buy-wait')">Buy Now or Wait?</button>
-                <button class="chatbot-option-btn" onclick="showResponse('prices')">Price Trends</button>
+            
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be added here dynamically -->
+                <div class="message bot-message">
+                    <div class="message-content">
+                        Hi! I'm AeroBot, your flight assistant. I can help you with:
+                        <ul>
+                            <li>Flight bookings and reservations</li>
+                            <li>Airlines and their policies</li>
+                            <li>Travel requirements</li>
+                            <li>Baggage information</li>
+                            <li>Flight prices and trends</li>
+                        </ul>
+                        What would you like to know?
+                    </div>
+                </div>
             </div>
-            <div class="chatbot-form-card">
-                <form onsubmit="showResponse('custom'); return false;">
-                    <label for="question" class="chatbot-form-label">Or ask your question:</label>
-                    <textarea id="question" name="question" rows="3" class="chatbot-form-textarea"
-                        placeholder="Type your travel question here..."></textarea>
-                    <button type="submit" class="btn btn-primary chatbot-form-btn">Ask</button>
+
+            <div class="chat-input-container">
+                <form id="chat-form" class="chat-form">
+                    <textarea 
+                        id="user-input" 
+                        placeholder="Type your question here..." 
+                        rows="2"
+                        class="chat-input"
+                    ></textarea>
+                    <button type="button" class="btn btn-primary send-button" id="send-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
                 </form>
-            </div>
-            <div class="chatbot-responses-section">
-                <div id="baggage-response" class="chat-response">
-                    <h4>Baggage Policies</h4>
-                    <p>Most airlines allow 1 cabin bag (max 7kg) and 1 checked bag (typically 23kg) for international
-                        flights. Budget airlines may charge extra. Always check with your specific airline for exact
-                        limits.</p>
-                </div>
-                <div id="visa-response" class="chat-response">
-                    <h4>Visa Requirements</h4>
-                    <p>Visa requirements vary by destination and nationality. For US citizens, popular destinations like
-                        Europe (ETIAS coming 2025), UK, and Japan typically allow visa-free stays for tourism. Always
-                        verify with official government sources.</p>
-                </div>
-                <div id="buy-wait-response" class="chat-response">
-                    <h4>Buy Now or Wait?</h4>
-                    <div class="buy-advice">
-                        <p>Our recommendation for your selected flight:</p>
-                        <p><strong>Book Now</strong> - Prices are currently 15% below average for this route and
-                            expected to rise.</p>
-                    </div>
-                </div>
-                <div id="prices-response" class="chat-response">
-                    <h4>Price Trends for Your Route</h4>
-                    <div class="price-history-chart">
-                        [Price History Chart - 3 Month Trend]
-                    </div>
-                    <p>Historical data shows prices typically drop 3-4 weeks before departure for this route, then rise
-                        sharply in the final 2 weeks.</p>
-                </div>
-                <div id="custom-response" class="chat-response">
-                    <h4>Custom Question</h4>
-                    <p>Thank you for your question! Our AI assistant will get back to you soon.</p>
-                </div>
             </div>
         </div>
     </main>
@@ -120,8 +101,10 @@
             </div>
         </div>
     </footer>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <!-- Load auth.js first since it's needed for the header -->
+    <script src="js/auth.js"></script>
+    <!-- Load chatbot.js last -->
     <script src="js/chatbot.js"></script>
 </body>
 
