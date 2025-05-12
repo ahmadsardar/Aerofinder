@@ -2,20 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AeroFinder - AI Assistant</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/chatbot.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/chatbot.css" />
+
+    <!-- Font Awesome for send icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
+    <!-- Copied header/nav from index.html for consistency :contentReference[oaicite:1]{index=1} -->
     <header>
         <nav class="nav-container nav-flex">
             <div class="nav-left">
@@ -27,7 +30,7 @@
                     <li><a href="search.html">Search Flights</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="chatbot.html" class="active">AI Assistant</a></li>
+                    <li><a href="chatbot.html">AI Assistant</a></li>
                 </ul>
             </div>
             <div class="nav-right auth-buttons">
@@ -35,13 +38,14 @@
             </div>
         </nav>
     </header>
+
     <main>
         <div class="chatbot-card">
             <div class="chatbot-card-header">
                 <h3>How can I help with your travel plans today?</h3>
                 <p>Ask me anything about flights, airlines, or travel requirements!</p>
             </div>
-            
+
             <div class="chat-messages" id="chat-messages">
                 <!-- Messages will be added here dynamically -->
                 <div class="message bot-message">
@@ -61,12 +65,8 @@
 
             <div class="chat-input-container">
                 <form id="chat-form" class="chat-form">
-                    <textarea 
-                        id="user-input" 
-                        placeholder="Type your question here..." 
-                        rows="2"
-                        class="chat-input"
-                    ></textarea>
+                    <textarea id="user-input" placeholder="Type your question here..." rows="2"
+                        class="chat-input"></textarea>
                     <button type="button" class="btn btn-primary send-button" id="send-button">
                         <i class="fas fa-paper-plane"></i>
                     </button>
@@ -74,6 +74,7 @@
             </div>
         </div>
     </main>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section">

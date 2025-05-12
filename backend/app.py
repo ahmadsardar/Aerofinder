@@ -231,5 +231,63 @@ def search_airports_route():
             'message': str(e)
         }), 500
 
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    try:
+        data = request.json
+        user_message = data.get('message', '')
+        
+        # Create the properly formatted prompt
+        prompt = create_prompt(user_message)
+        
+        # Call HuggingFace API
+        API_URL = "https://api-inference.huggingface.co/models/TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+        headers = {
+            "Authorization": f"Bearer {os.getenv('HUGGINGFACE_API_KEY')}",
+            "Content-Type": "application/json"
+        }
+        
+        response = requests.post(
+            API_URL,
+            headers=headers,
+            json={
+                "inputs": prompt,
+                "parameters": {
+                    "max_new_tokens": 150,
+                    "temperature": 0.7,
+                    "top_p": 0.9,
+                    "do_sample": True,
+                    "return_full_text": False
+                }
+            }
+        )
+        
+        # Handle API response
+        if response.status_code == 200:
+            response_data = response.json()
+            if isinstance(response_data, list) and len(response_data) > 0:
+                bot_response = response_data[0].get('generated_text', '').strip()
+                # Clean up response markers if present
+                bot_response = bot_response.replace('<|assistant|>', '').replace('<|user|>', '').strip()
+                return jsonify({"response": bot_response})
+            elif isinstance(response_data, dict):
+                bot_response = response_data.get('generated_text', '').strip()
+                bot_response = bot_response.replace('<|assistant|>', '').replace('<|user|>', '').strip()
+                return jsonify({"response": bot_response})
+            
+        # If we get here, something went wrong with the API response
+        print(f"API Error: {response.status_code}")
+        print(f"Response: {response.text}")
+        return jsonify({
+            "error": "Sorry, I'm having trouble generating a response right now. Please try again."
+        }), 500
+            
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return jsonify({
+            "error": "An error occurred while processing your request"
+        }), 500
+
 if __name__ == '__main__':
+    app.run(debug=True, port=5000) 
     app.run(debug=True, port=5000) 

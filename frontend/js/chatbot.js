@@ -1,5 +1,5 @@
 // Simple chatbot implementation
-$(document).ready(function() {
+$(document).ready(function () {
     const $chatMessages = $('#chat-messages');
     const $userInput = $('#user-input');
     const $sendButton = $('#send-button');
@@ -40,7 +40,7 @@ $(document).ready(function() {
     // Function to handle sending message
     async function handleMessage() {
         const message = $userInput.val().trim();
-        
+
         if (!message || isProcessing) {
             return;
         }
@@ -72,7 +72,7 @@ $(document).ready(function() {
             });
 
             const data = await response.json();
-            
+
             // Remove typing indicator
             removeTypingIndicator();
 
@@ -113,16 +113,16 @@ $(document).ready(function() {
     }
 
     // Event Handlers
-    $chatForm.on('submit', function(e) {
+    $chatForm.on('submit', function (e) {
         e.preventDefault();
         handleMessage();
     });
 
-    $sendButton.on('click', function() {
+    $sendButton.on('click', function () {
         handleMessage();
     });
 
-    $userInput.on('keydown', function(e) {
+    $userInput.on('keydown', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             handleMessage();
@@ -130,7 +130,7 @@ $(document).ready(function() {
     });
 
     // Auto-resize textarea
-    $userInput.on('input', function() {
+    $userInput.on('input', function () {
         this.style.height = 'auto';
         this.style.height = Math.min(this.scrollHeight, 150) + 'px';
     });
