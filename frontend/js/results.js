@@ -1,5 +1,38 @@
 // results.js
 
+// Add notification system at the top of the file
+function showNotification(message) {
+    // Create notification element if it doesn't exist
+    let notification = document.getElementById('saveNotification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'saveNotification';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            border-radius: 4px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        `;
+        document.body.appendChild(notification);
+    }
+    
+    // Show notification
+    notification.textContent = message;
+    notification.style.opacity = '1';
+    
+    // Hide after 2 seconds
+    setTimeout(() => {
+        notification.style.opacity = '0';
+    }, 2000);
+}
+
 // Helper: Format duration from ISO 8601 to 'X hrs Y mins'
 function formatDuration(isoDuration) {
     const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?/);
@@ -42,7 +75,39 @@ function bookFlight(origin, destination, date, flightNumber) {
     }
 }
 
+// Helper: Check if flight is saved
+async function isFlightSaved(flightId) {
+    const user = firebase.auth().currentUser;
+    if (!user) return false;
+
+    const db = firebase.firestore();
+    const querySnapshot = await db.collection('users').doc(user.uid).collection('bookmarks')
+        .where('id', '==', flightId)
+        .get();
+    
+    return !querySnapshot.empty;
+}
+
+// Helper: Get bookmark document ID for a flight
+async function getBookmarkId(flightId) {
+    const user = firebase.auth().currentUser;
+    if (!user) return null;
+
+    const db = firebase.firestore();
+    const querySnapshot = await db.collection('users').doc(user.uid).collection('bookmarks')
+        .where('id', '==', flightId)
+        .get();
+    
+    return querySnapshot.empty ? null : querySnapshot.docs[0].id;
+}
+
 function saveFlight(flightId) {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+        window.location.href = 'login.html';
+        return;
+    }
+
     let flights = [];
     try {
         flights = JSON.parse(localStorage.getItem('flightResults')) || [];
@@ -51,37 +116,65 @@ function saveFlight(flightId) {
     }
     const flight = flights.find(f => f.id === flightId);
     if (!flight) return;
-    let bookmarks = [];
-    try {
-        bookmarks = JSON.parse(localStorage.getItem('bookmarkedFlights')) || [];
-    } catch {
-        bookmarks = [];
-    }
-    // Prevent duplicates
-    if (!bookmarks.some(f => f.id === flightId)) {
-        bookmarks.push(flight);
-        localStorage.setItem('bookmarkedFlights', JSON.stringify(bookmarks));
-    }
-    // Update button UI
+
     const btn = document.querySelector(`button[data-save-id='${flightId}']`);
-    if (btn) {
-        btn.textContent = 'Saved';
-        btn.disabled = true;
-        btn.classList.add('btn-disabled');
+    const db = firebase.firestore();
+    const bookmarkRef = db.collection('users').doc(user.uid).collection('bookmarks');
+
+    if (btn.textContent === 'Save') {
+        // Save to Firebase
+        bookmarkRef.add({
+            ...flight,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        .then(() => {
+            // Update all matching buttons on the page
+            const buttons = document.querySelectorAll(`button[data-save-id='${flightId}']`);
+            buttons.forEach(btn => {
+                btn.textContent = 'Unsave';
+                btn.classList.add('btn-saved');
+            });
+            showNotification('Flight saved successfully!');
+        })
+        .catch((error) => {
+            console.error('Error saving flight:', error);
+            showNotification('Error saving flight. Please try again.');
+        });
+    } else {
+        // Unsave - first find the bookmark document
+        getBookmarkId(flightId)
+            .then(bookmarkId => {
+                if (!bookmarkId) {
+                    console.error('Bookmark not found');
+                    return;
+                }
+                return bookmarkRef.doc(bookmarkId).delete();
+            })
+            .then(() => {
+                // Update all matching buttons on the page
+                const buttons = document.querySelectorAll(`button[data-save-id='${flightId}']`);
+                buttons.forEach(btn => {
+                    btn.textContent = 'Save';
+                    btn.classList.remove('btn-saved');
+                });
+                showNotification('Flight removed from saved items');
+            })
+            .catch((error) => {
+                console.error('Error removing bookmark:', error);
+                showNotification('Error removing flight. Please try again.');
+            });
     }
 }
 
-function createFlightCard(flight) {
+async function createFlightCard(flight) {
     const offer = flight.itineraries[0];
     const segment = offer.segments[0];
     const price = flight.price.total;
     const currency = flight.price.currency;
+    
     // Check if already bookmarked
-    let isBookmarked = false;
-    try {
-        const bookmarks = JSON.parse(localStorage.getItem('bookmarkedFlights')) || [];
-        isBookmarked = bookmarks.some(f => f.id === flight.id);
-    } catch { }
+    const isBookmarked = await isFlightSaved(flight.id);
+
     return `
         <div class="flight-card">
             <div class="flight-header">
@@ -113,11 +206,55 @@ function createFlightCard(flight) {
                 </div>
             </div>
             <div class="action-buttons">
-                <button class="btn btn-primary" onclick="bookFlight('${segment.departure.iataCode}', '${segment.arrival.iataCode}', '${segment.departure.at}', '${segment.carrierCode} ${segment.number}')\">Book Now</button>
-                <button class="btn btn-outline${isBookmarked ? ' btn-disabled' : ''}\" data-save-id='${flight.id}' onclick=\"saveFlight('${flight.id}')\" ${isBookmarked ? 'disabled' : ''}>${isBookmarked ? 'Saved' : 'Save'}</button>
+                <button class="btn btn-primary" onclick="bookFlight('${segment.departure.iataCode}', '${segment.arrival.iataCode}', '${segment.departure.at}', '${segment.carrierCode} ${segment.number}')">Book Now</button>
+                <button class="btn btn-outline${isBookmarked ? ' btn-saved' : ''}" data-save-id="${flight.id}" onclick="saveFlight('${flight.id}')">${isBookmarked ? 'Unsave' : 'Save'}</button>
             </div>
         </div>
     `;
+}
+
+// Helper: Deduplicate flights by flight number
+function deduplicateFlights(flights) {
+    const seen = new Map();
+    return flights.filter(flight => {
+        const segment = flight.itineraries[0].segments[0];
+        const flightKey = `${segment.carrierCode}${segment.number}-${segment.departure.at}`;
+        
+        if (seen.has(flightKey)) {
+            // If we've seen this flight before, keep the one with shorter duration
+            const existing = seen.get(flightKey);
+            const existingDuration = getDurationMinutes(existing.itineraries[0].duration);
+            const currentDuration = getDurationMinutes(flight.itineraries[0].duration);
+            
+            if (currentDuration < existingDuration) {
+                seen.set(flightKey, flight);
+                return true;
+            }
+            return false;
+        } else {
+            seen.set(flightKey, flight);
+            return true;
+        }
+    });
+}
+
+// Update renderResults to handle async createFlightCard
+async function renderResults(flights) {
+    const container = document.getElementById('flightResults');
+    if (!flights || flights.length === 0) {
+        container.innerHTML = '<div class="no-results">No flights found</div>';
+        return;
+    }
+    
+    // Deduplicate flights before rendering
+    const uniqueFlights = deduplicateFlights(flights);
+    
+    // Create all flight cards and wait for them to complete
+    const cardPromises = uniqueFlights.map(flight => createFlightCard(flight));
+    const cards = await Promise.all(cardPromises);
+    
+    // Update the container with all cards
+    container.innerHTML = cards.join('');
 }
 
 function getDurationMinutes(isoDuration) {
@@ -126,15 +263,6 @@ function getDurationMinutes(isoDuration) {
     const hours = match[1] ? parseInt(match[1]) : 0;
     const mins = match[2] ? parseInt(match[2]) : 0;
     return hours * 60 + mins;
-}
-
-function renderResults(flights) {
-    const container = document.getElementById('flightResults');
-    if (!flights || flights.length === 0) {
-        container.innerHTML = '<div class="no-results">No flights found</div>';
-        return;
-    }
-    container.innerHTML = flights.map(createFlightCard).join('');
 }
 
 function sortResults(flights, sortType) {
@@ -280,22 +408,6 @@ function filterByAirline(flights, airlineCode) {
     return flights.filter(flight => flight.itineraries[0].segments[0].carrierCode === airlineCode);
 }
 
-function renderBookmarkedFlights() {
-    const container = document.getElementById('bookmarkedFlights');
-    let bookmarks = [];
-    try {
-        bookmarks = JSON.parse(localStorage.getItem('bookmarkedFlights')) || [];
-    } catch {
-        bookmarks = [];
-    }
-    if (!container) return;
-    if (!bookmarks.length) {
-        container.innerHTML = '<div class="no-results">No bookmarked flights yet.</div>';
-        return;
-    }
-    container.innerHTML = bookmarks.map(createFlightCard).join('');
-}
-
 // Main
 window.addEventListener('DOMContentLoaded', () => {
     let flights = [];
@@ -306,7 +418,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     renderAirlineFilter(flights);
     renderResults(flights);
-    renderBookmarkedFlights();
 
     const sortSelect = document.getElementById('sortSelect');
     const airlineFilter = document.getElementById('airlineFilter');

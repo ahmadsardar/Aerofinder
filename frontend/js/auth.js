@@ -29,14 +29,14 @@ function updateAuthUI(user) {
         // User is signed in
         console.log('User is signed in:', user);
         authButtons.innerHTML = `
-            <a href="dashboard.html" class="btn btn-outline">My Account</a>
+            <a href="dashboard.html" class="btn btn-secondary">My Account</a>
             <button onclick="signOut()" class="btn btn-primary">Sign Out</button>
         `;
     } else {
         // User is signed out
         console.log('User is signed out');
         authButtons.innerHTML = `
-            <a href="register.html" class="btn btn-outline">Register</a>
+            <a href="register.html" class="btn btn-secondary">Register</a>
             <a href="login.html" class="btn btn-primary">Login</a>
         `;
     }

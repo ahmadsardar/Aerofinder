@@ -77,31 +77,51 @@
     letter-spacing: 0.5px;
 }
 
+.filter-section {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+    margin: 2rem auto;
+}
+
+.filter-section h3 {
+    color: var(--secondary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
 .filter-bar {
     display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: flex-end;
-    margin: 2.5rem auto 0 auto;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
     width: 100%;
-    max-width: 900px;
 }
 
 .filter-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    min-width: 180px;
-    background: var(--white);
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    padding: 1.2rem 1rem;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    max-width: 400px;
 }
 
-.filter-group label,
+.filter-group label {
+    font-weight: 500;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+    justify-content: center;
+    width: 100%;
+}
+
 .filter-group select,
 .filter-group input {
     text-align: center;
@@ -110,22 +130,205 @@
     max-width: 200px;
 }
 
-.filter-group label {
-    font-weight: 500;
+.price-filter-group {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.price-display {
+    font-size: 1.5rem;
+    font-weight: 600;
     color: var(--secondary);
-    margin-bottom: 0;
-    gap: 0.3rem;
+    margin: 0.5rem 0;
 }
 
-.filter-group .form-control {
-    min-width: 120px;
-    padding: 0.5rem 0.8rem;
+.slider-container {
+    width: 100%;
+    padding: 1.5rem 0.5rem 0.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin-bottom: -1rem;
+    padding: 0 9px;
+    position: relative;
+    pointer-events: none;
+}
+
+.min-value, .max-value {
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 20px;
+}
+
+.min-value {
+    left: -10px;
+}
+
+.max-value {
+    right: -10px;
+}
+
+.range-slider {
+    position: relative;
+    width: 50%;
+    height: 4px;
+    margin-top: 25px;
+}
+
+.slider-track {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+
+.slider-track::before {
+    content: '';
+    position: absolute;
+    left: var(--left, 0);
+    width: var(--width, 0);
+    height: 100%;
+    background: var(--secondary);
+    border-radius: 2px;
+}
+
+.price-slider {
+    position: absolute;
+    top: -7px;
+    width: 100%;
+    height: 18px;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.price-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.2s;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--secondary);
+}
+
+.price-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--secondary);
+    transition: transform 0.2s;
+}
+
+.price-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.price-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Hide default track in Firefox */
+.price-slider::-moz-range-track {
+    background: none;
+}
+
+/* Active slider track */
+.slider-track::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    background: var(--secondary);
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.stops-filter {
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stops-filter select {
+    width: 100%;
+    text-align: center;
+    background: var(--light-gray);
+    border: 1px solid #ddd;
     border-radius: 6px;
+    padding: 0.7rem;
     font-size: 1rem;
+    transition: all 0.2s;
 }
 
-#priceRange {
-    accent-color: var(--primary);
+.stops-filter select:focus {
+    border-color: var(--primary);
+    background: var(--white);
+    outline: none;
+}
+
+.price-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+    margin-bottom: 0.5rem;
+}
+
+.price-inputs-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.price-inputs-row .form-control {
+    flex: 1;
+    text-align: center;
+    background: var(--light-gray);
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.7rem;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.price-inputs-row .form-control:focus {
+    border-color: var(--primary);
+    background: var(--white);
+    outline: none;
+}
+
+.price-separator {
+    color: var(--dark-gray);
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
 }
 
 .flight-results {
@@ -141,11 +344,12 @@
     background: var(--white);
     border-radius: 14px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
-    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     position: relative;
     transition: box-shadow 0.2s, transform 0.2s;
+    gap: 1rem;
 }
 
 .flight-card:hover {
@@ -155,195 +359,77 @@
 
 .flight-header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    gap: 1rem;
 }
 
-.flight-airline {
-    font-weight: 600;
-    color: var(--secondary);
-    font-size: 1.1rem;
+.flight-route {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.flight-meta {
+    color: #888;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.flight-price {
-    font-size: 1.6rem;
+.price-highlight {
+    font-size: 1.25rem;
     font-weight: bold;
     color: var(--primary);
-    background: var(--light-gray);
-    border-radius: 6px;
-    padding: 0.4rem 1rem;
+    white-space: nowrap;
 }
 
 .flight-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--light-gray);
+    border-radius: 8px;
+    margin: 0.5rem 0;
+}
+
+.detail-item {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.2rem 2.5rem;
-    margin-bottom: 1.2rem;
-    color: var(--dark-gray);
-    font-size: 1rem;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
 .detail-label {
+    font-size: 0.85rem;
     font-weight: 500;
-    color: var(--secondary);
-    margin-right: 0.3rem;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.detail-item span:not(.detail-label) {
+    font-size: 0.95rem;
+    color: var(--dark-gray);
 }
 
 .action-buttons {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: auto;
-    gap: 1rem;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
 }
 
 .action-buttons .btn {
-    min-width: 120px;
-    font-size: 1rem;
-    padding: 0.7rem 1.2rem;
-    border-radius: 6px;
-}
-
-/* Dual price slider and input styles */
-.price-filter-group {
-    background: var(--white);
-    color: var(--dark-gray);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.price-filter-group label,
-.price-filter-group .price-labels,
-.price-filter-group .price-separator {
-    color: var(--secondary);
-}
-
-.price-inputs-row .form-control.price-input {
-    background: var(--white);
-    color: var(--dark-gray);
-    border: 1px solid #ddd;
-}
-
-.slider-container {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    min-width: 120px;
-    width: 160px;
-    position: relative;
-}
-
-.slider-container input[type="range"] {
-    width: 80px;
-    min-width: 60px;
-    max-width: 100px;
-    accent-color: var(--primary);
-}
-
-.price-input {
-    width: 70px;
-    min-width: 60px;
-    max-width: 90px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    min-width: 100px;
     text-align: center;
-    font-size: 1rem;
-    padding: 0.5rem 0.3rem;
 }
 
-.price-labels {
-    display: flex;
-    justify-content: space-between;
-    width: 240px;
-    font-size: 0.98rem;
-    color: var(--dark-gray);
-    margin-bottom: 0.2rem;
-    margin-left: 2px;
-}
-
-.slider-container.dual-slider {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    width: 320px;
-    max-width: 100%;
-}
-
-.slider-track {
-    position: relative;
-    width: 140px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-}
-
-.slider-track input[type="range"] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 140px;
-    pointer-events: none;
-    background: none;
-    z-index: 2;
+#priceRange {
     accent-color: var(--primary);
-    height: 24px;
-}
-
-.slider-track input[type="range"]::-webkit-slider-thumb {
-    pointer-events: auto;
-    z-index: 3;
-}
-
-.slider-track input[type="range"]::-moz-range-thumb {
-    pointer-events: auto;
-    z-index: 3;
-}
-
-.slider-range {
-    position: absolute;
-    height: 6px;
-    background: var(--primary);
-    border-radius: 3px;
-    top: 9px;
-    z-index: 1;
-}
-
-.price-inputs-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 0.5rem;
-    justify-content: center;
-    width: 100%;
-}
-
-.price-separator {
-    font-size: 1.2rem;
-    color: var(--dark-gray);
-    margin: 0 0.5rem;
-}
-
-.filter-card {
-    background: var(--white);
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-    padding: 2rem 2rem 1.5rem 2rem;
-    max-width: 950px;
-    width: 100%;
-    margin: 0 auto 2.5rem auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.return-date-group {
-    transition: opacity 0.3s ease;
-}
-
-.return-date-group.hidden {
-    opacity: 0;
-    pointer-events: none;
 }
 
 @media (max-width: 900px) {
@@ -352,10 +438,8 @@
     }
 
     .filter-bar {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
-        align-items: center;
-        max-width: 100%;
     }
 
     .filter-group {
@@ -372,11 +456,12 @@
     }
 
     .price-inputs-row {
-        justify-content: center;
+        flex-direction: column;
+        gap: 0.5rem;
     }
 
-    .price-labels {
-        justify-content: center;
+    .price-separator {
+        display: none;
     }
 
     .flight-results {
@@ -424,8 +509,14 @@
         gap: 0.7rem;
     }
 
+    .filter-section {
+        padding: 1.5rem 1rem;
+        margin: 1.5rem auto;
+    }
+
     .filter-bar {
-        padding: 0.7rem;
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .flight-card {
@@ -433,9 +524,7 @@
     }
 
     .slider-container {
-        width: 80px;
-        min-width: 60px;
-        gap: 0.2rem;
+        padding: 1rem 0.5rem 0.25rem;
     }
 
     .price-input {
@@ -455,6 +544,21 @@
     .price-labels {
         width: 90px;
         font-size: 0.93rem;
+    }
+
+    .price-inputs-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .price-separator {
+        display: none;
+    }
+
+    .filter-group,
+    .price-filter-group,
+    .stops-filter {
+        max-width: 100%;
     }
 }
 
@@ -577,25 +681,29 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    .flight-details {
+        grid-template-columns: 1fr;
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+
     .flight-header {
         flex-direction: column;
-        gap: 10px;
+        gap: 0.75rem;
     }
 
     .price-highlight {
-        font-size: 1.2em;
-    }
-
-    .flight-details {
-        grid-template-columns: 1fr;
+        align-self: flex-start;
     }
 
     .action-buttons {
         flex-direction: column;
+        width: 100%;
     }
 
-    .action-buttons button {
+    .action-buttons .btn {
         width: 100%;
+        padding: 0.75rem;
     }
 
     .search-form .form-row {
@@ -674,4 +782,15 @@
     align-items: center;
     justify-content: center;
     gap: 0.7rem;
+}
+
+.btn-saved {
+    background-color: #e0e0e0 !important;
+    border-color: #e0e0e0 !important;
+    color: #666 !important;
+}
+
+.btn-saved:hover {
+    background-color: #d0d0d0 !important;
+    border-color: #d0d0d0 !important;
 }

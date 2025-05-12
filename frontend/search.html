@@ -95,32 +95,30 @@
         </div>
 
         <section class="filter-section">
-            <div class="filter-card">
-                <div class="filter-bar">
-                    <div class="filter-group price-filter-group">
-                        <label><i class="fas fa-dollar-sign"></i> Price</label>
-                        <div class="price-labels">
-                            <span>Min</span>
-                            <span style="flex:1"></span>
-                            <span>Max</span>
+            <h3>Filters</h3>
+            <div class="filter-bar">
+                <div class="filter-group price-filter-group">
+                    <label><i class="fas fa-dollar-sign"></i> Price</label>
+                    <div class="slider-container">
+                        <div class="price-values">
+                            <span class="min-value">$0</span>
+                            <span class="max-value">$2000+</span>
                         </div>
-                        <div class="price-inputs-row">
-                            <input type="number" id="priceMin" class="form-control price-input" min="0" max="5000"
-                                value="0" placeholder="Min">
-                            <span class="price-separator">-</span>
-                            <input type="number" id="priceMax" class="form-control price-input" min="0" max="5000"
-                                value="1000" placeholder="Max">
+                        <div class="range-slider">
+                            <div class="slider-track"></div>
+                            <input type="range" id="priceMin" class="price-slider" min="0" max="2000" value="0" step="50">
+                            <input type="range" id="priceMax" class="price-slider" min="0" max="2000" value="2000" step="50">
                         </div>
                     </div>
-                    <div class="filter-group">
-                        <label for="stops"><i class="fas fa-exchange-alt"></i> Stops</label>
-                        <select id="stops" class="form-control">
-                            <option value="all">All</option>
-                            <option value="0">Non-stop</option>
-                            <option value="1">1 Stop</option>
-                            <option value="2">2+ Stops</option>
-                        </select>
-                    </div>
+                </div>
+                <div class="filter-group stops-filter">
+                    <label for="stops"><i class="fas fa-exchange-alt"></i> Stops</label>
+                    <select id="stops" class="form-control">
+                        <option value="all">All</option>
+                        <option value="0">Non-stop</option>
+                        <option value="1">1 Stop</option>
+                        <option value="2">2+ Stops</option>
+                    </select>
                 </div>
             </div>
         </section>
@@ -129,55 +127,38 @@
             <!-- Flight results will be dynamically added here -->
         </div>
         <script>
-            // Dual slider and input sync logic (single track, two handles)
-            const minInput = document.getElementById('priceMin');
-            const maxInput = document.getElementById('priceMax');
-            const minSlider = document.getElementById('priceRangeMin');
-            const maxSlider = document.getElementById('priceRangeMax');
-            const minGap = 10;
-            const maxVal = 5000;
-            function syncMin(val) {
-                if (parseInt(val) > parseInt(maxSlider.value) - minGap) {
-                    minSlider.value = maxSlider.value - minGap;
-                    minInput.value = maxSlider.value - minGap;
-                } else {
-                    minSlider.value = val;
+            // Double-ended price slider functionality
+            const priceMin = document.getElementById('priceMin');
+            const priceMax = document.getElementById('priceMax');
+            const minValue = document.querySelector('.min-value');
+            const maxValue = document.querySelector('.max-value');
+            const track = document.querySelector('.slider-track');
+            
+            function setSliderValues() {
+                const min = parseInt(priceMin.value);
+                const max = parseInt(priceMax.value);
+                
+                if (min > max - 50) {
+                    priceMin.value = max - 50;
+                    return;
                 }
-                updateSliderRange();
+                
+                const percent1 = (min / 2000) * 100;
+                const percent2 = (max / 2000) * 100;
+                
+                track.style.background = `white`;
+                track.style.setProperty('--left', `${percent1}%`);
+                track.style.setProperty('--width', `${percent2 - percent1}%`);
+                
+                minValue.textContent = `$${min}`;
+                maxValue.textContent = `$${max}`;
             }
-            function syncMax(val) {
-                if (parseInt(val) < parseInt(minSlider.value) + minGap) {
-                    maxSlider.value = parseInt(minSlider.value) + minGap;
-                    maxInput.value = parseInt(minSlider.value) + minGap;
-                } else {
-                    maxSlider.value = val;
-                }
-                updateSliderRange();
-            }
-            function updateSliderRange() {
-                const range = document.querySelector('.slider-range');
-                const min = parseInt(minSlider.value);
-                const max = parseInt(maxSlider.value);
-                const percentMin = (min / maxVal) * 100;
-                const percentMax = (max / maxVal) * 100;
-                range.style.left = percentMin + '%';
-                range.style.width = (percentMax - percentMin) + '%';
-            }
-            minInput.addEventListener('input', e => {
-                syncMin(e.target.value);
-            });
-            maxInput.addEventListener('input', e => {
-                syncMax(e.target.value);
-            });
-            minSlider.addEventListener('input', e => {
-                syncMin(e.target.value);
-                minInput.value = minSlider.value;
-            });
-            maxSlider.addEventListener('input', e => {
-                syncMax(e.target.value);
-                maxInput.value = maxSlider.value;
-            });
-            updateSliderRange();
+            
+            priceMin.addEventListener('input', setSliderValues);
+            priceMax.addEventListener('input', setSliderValues);
+            
+            // Initialize slider
+            setSliderValues();
         </script>
     </main>
 

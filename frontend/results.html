@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/search.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+    <!-- Custom Auth Script -->
+    <script src="js/auth.js"></script>
 </head>
 
 <body>
@@ -47,10 +53,6 @@
                 </select>
             </div>
         </div>
-        <section class="bookmarks-section" style="max-width: 900px; margin: 0 auto 2rem auto;">
-            <h3>My Bookmarked Flights</h3>
-            <div id="bookmarkedFlights"></div>
-        </section>
         <div class="flight-results" id="flightResults"></div>
     </main>
     <footer>
