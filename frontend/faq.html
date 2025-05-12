@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - AeroFinder</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom Auth Script -->
+    <script src="js/auth.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container nav-flex">
+            <div class="nav-left">
+                <a href="index.html" class="logo"><img src="images/logo.png" alt="AeroFinder Logo"
+                        style="height: 40px; vertical-align: middle;"> AeroFinder</a>
+            </div>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="search.html">Search Flights</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="chatbot.html">AI Assistant</a></li>
+                </ul>
+            </div>
+            <div class="nav-right auth-buttons">
+                <!-- Auth buttons will be dynamically updated -->
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content-container">
+            <section class="content-section">
+                <h1>Frequently Asked Questions</h1>
+                <p>Find answers to common questions about using AeroFinder for your flight bookings.</p>
+
+                <div class="faq-categories">
+                    <h2>Booking & Reservations</h2>
+                    <div class="faq-item">
+                        <div class="faq-question">How do I book a flight?</div>
+                        <div class="faq-answer">
+                            <p>To book a flight:</p>
+                            <ol>
+                                <li>Enter your departure and arrival cities</li>
+                                <li>Select your travel dates</li>
+                                <li>Choose the number of passengers and cabin class</li>
+                                <li>Click "Search Flights"</li>
+                                <li>Select your preferred flight from the results</li>
+                                <li>Follow the booking process to complete your reservation</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Can I modify or cancel my booking?</div>
+                        <div class="faq-answer">
+                            <p>Yes, you can modify or cancel your booking through your account dashboard. Please note
+                                that modification and cancellation policies vary by airline and fare type. Some bookings
+                                may be non-refundable or subject to fees.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">What payment methods do you accept?</div>
+                        <div class="faq-answer">
+                            <p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and
+                                various local payment methods depending on your region.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-categories">
+                    <h2>Account & Profile</h2>
+                    <div class="faq-item">
+                        <div class="faq-question">How do I create an account?</div>
+                        <div class="faq-answer">
+                            <p>To create an account:</p>
+                            <ol>
+                                <li>Click the "Login" button in the top right corner</li>
+                                <li>Select "Create Account"</li>
+                                <li>Fill in your details (name, email, password)</li>
+                                <li>Verify your email address</li>
+                                <li>Complete your profile information</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">How do I reset my password?</div>
+                        <div class="faq-answer">
+                            <p>To reset your password:</p>
+                            <ol>
+                                <li>Click the "Login" button</li>
+                                <li>Select "Forgot Password"</li>
+                                <li>Enter your email address</li>
+                                <li>Follow the instructions in the email you receive</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-categories">
+                    <h2>Flight Information</h2>
+                    <div class="faq-item">
+                        <div class="faq-question">How do I check my flight status?</div>
+                        <div class="faq-answer">
+                            <p>You can check your flight status in several ways:</p>
+                            <ul>
+                                <li>Through your account dashboard</li>
+                                <li>Using the flight number on our homepage</li>
+                                <li>By contacting the airline directly</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">What is the baggage allowance?</div>
+                        <div class="faq-answer">
+                            <p>Baggage allowances vary by airline and fare type. You can find specific baggage
+                                information when booking your flight or by checking the airline's website. Generally,
+                                economy class includes one checked bag, while business and first class may include more.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-categories">
+                    <h2>Technical Support</h2>
+                    <div class="faq-item">
+                        <div class="faq-question">What should I do if I encounter technical issues?</div>
+                        <div class="faq-answer">
+                            <p>If you experience technical issues:</p>
+                            <ol>
+                                <li>Try refreshing the page</li>
+                                <li>Clear your browser cache and cookies</li>
+                                <li>Try using a different browser</li>
+                                <li>Contact our support team if the issue persists</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Is my personal information secure?</div>
+                        <div class="faq-answer">
+                            <p>Yes, we take security seriously. We use industry-standard encryption to protect your
+                                personal and payment information. Our security measures include:</p>
+                            <ul>
+                                <li>SSL encryption for all data transmission</li>
+                                <li>Secure payment processing</li>
+                                <li>Regular security audits</li>
+                                <li>Compliance with data protection regulations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Contact Support</a>
+                    <a href="chatbot.html" class="btn btn-secondary">Chat with AI Assistant</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

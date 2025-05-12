@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroFinder - Flight Details</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom Auth Script -->
+    <script src="js/auth.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-brand">
+            <img src="images/logo.png" alt="AeroFinder Logo" class="nav-logo">
+            <h1>AeroFinder</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="search.html">Search Flights</a></li>
+                <li><a href="filter.html">Flight Results</a></li>
+                <li><a href="chatbot.html">Chatbot</a></li>
+                <div class="auth-buttons">
+                    <a href="register.html" class="btn btn-outline">Register</a>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="flight-detail-container">
+            <div class="flight-detail-header">
+                <div>
+                    <h2>New York (JFK) → London (LHR)</h2>
+                    <p>Friday, June 15, 2023</p>
+                </div>
+                <div class="flight-price">$450</div>
+            </div>
+
+            <div class="flight-detail-body">
+                <div class="flight-section">
+                    <h4>Flight Details</h4>
+                    <div class="detail-row">
+                        <span class="detail-label">Flight Number</span>
+                        <span>BA 112</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Airline</span>
+                        <span>British Airways</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Aircraft</span>
+                        <span>Boeing 787-9 Dreamliner</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Travel Class</span>
+                        <span>Economy</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Duration</span>
+                        <span>6h 45m</span>
+                    </div>
+                </div>
+
+                <div class="flight-section">
+                    <h4>Baggage Allowance</h4>
+                    <div class="detail-row">
+                        <span class="detail-label">Cabin Baggage</span>
+                        <span>1 × 7kg (max 45 × 36 × 20cm)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Checked Baggage</span>
+                        <span>1 × 23kg included</span>
+                    </div>
+                </div>
+
+                <div class="flight-section">
+                    <h4>Departure</h4>
+                    <div class="detail-row">
+                        <span class="detail-label">Airport</span>
+                        <span>John F. Kennedy (JFK), Terminal 7</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Time</span>
+                        <span>10:00 AM (local time)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Gate</span>
+                        <span>Opens at 8:30 AM</span>
+                    </div>
+                </div>
+
+                <div class="flight-section">
+                    <h4>Arrival</h4>
+                    <div class="detail-row">
+                        <span class="detail-label">Airport</span>
+                        <span>Heathrow (LHR), Terminal 5</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Time</span>
+                        <span>9:45 PM (local time)</span>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <h4>Flight Timeline</h4>
+                    <div class="timeline-item">
+                        <strong>10:00 AM</strong> - Departure from JFK
+                    </div>
+                    <div class="timeline-item">
+                        <strong>10:30 AM</strong> - Meal service begins
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2:00 PM</strong> - Estimated cruising altitude
+                    </div>
+                    <div class="timeline-item">
+                        <strong>9:45 PM</strong> - Arrival at LHR
+                    </div>
+                </div>
+                <div class="action-buttons-container">
+                    <div class="action-buttons">
+                        <button class="btn btn-primary btn-large">Book Now</button>
+                        <button class="btn btn-outline btn-large">Save for Later</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <p>© 2025 AeroFinder. All rights reserved.</p>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/details.js"></script>
+</body>
+
+</html>

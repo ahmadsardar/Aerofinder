@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AeroFinder</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom Auth Script -->
+    <script src="js/auth.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container nav-flex">
+            <div class="nav-left">
+                <a href="index.html" class="logo"><img src="images/logo.png" alt="AeroFinder Logo"
+                        style="height: 40px; vertical-align: middle;"> AeroFinder</a>
+            </div>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="search.html">Search Flights</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="chatbot.html">AI Assistant</a></li>
+                </ul>
+            </div>
+            <div class="nav-right auth-buttons">
+                <!-- Auth buttons will be dynamically updated -->
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content-container">
+            <section class="content-section">
+                <h1>About AeroFinder</h1>
+                <p>AeroFinder is a modern flight search platform designed to make your travel planning experience
+                    seamless and enjoyable. Our mission is to help travelers find the best flight deals while providing
+                    a user-friendly interface and innovative features.</p>
+
+                <h2>Our Story</h2>
+                <p>Founded in 2024, AeroFinder was born from a simple idea: to make flight search and booking more
+                    accessible and efficient. Our team of travel enthusiasts and tech experts came together to create a
+                    platform that combines powerful search capabilities with an intuitive user experience.</p>
+
+                <h2>What Sets Us Apart</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-search"></i>
+                        <h3>Smart Search</h3>
+                        <p>Our advanced search algorithm helps you find the best flight deals across multiple airlines
+                            and routes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-bell"></i>
+                        <h3>Price Alerts</h3>
+                        <p>Set up alerts for your desired routes and get notified when prices drop.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Assistant</h3>
+                        <p>Our AI-powered chatbot helps you with travel planning and answers your questions 24/7.</p>
+                    </div>
+                </div>
+
+                <h2>Our Values</h2>
+                <ul>
+                    <li><strong>User-First Approach:</strong> We prioritize user experience and satisfaction in
+                        everything we do.</li>
+                    <li><strong>Innovation:</strong> We continuously improve our platform with the latest technology and
+                        features.</li>
+                    <li><strong>Transparency:</strong> We believe in clear pricing and honest communication with our
+                        users.</li>
+                    <li><strong>Sustainability:</strong> We support eco-friendly travel options and sustainable
+                        practices.</li>
+                </ul>
+
+                <h2>Join Our Team</h2>
+                <p>We're always looking for talented individuals who share our passion for travel and technology. Check
+                    out our <a href="careers.html">careers page</a> for current openings.</p>
+
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                    <a href="search.html" class="btn btn-secondary">Start Searching</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

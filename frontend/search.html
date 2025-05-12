@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Flights - AeroFinder</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom Auth Script -->
+    <script src="js/auth.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container nav-flex">
+            <div class="nav-left">
+                <a href="index.html" class="logo"><img src="images/logo.png" alt="AeroFinder Logo"
+                        style="height: 40px; vertical-align: middle;"> AeroFinder</a>
+            </div>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="search.html" class="active">Search Flights</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="chatbot.html">AI Assistant</a></li>
+                </ul>
+            </div>
+            <div class="nav-right auth-buttons">
+                <!-- Auth buttons will be dynamically updated -->
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="search-hero" style="padding-top: 5.5rem;">
+            <div class="search-form-card">
+                <form class="search-form" id="searchForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="from"><i class="fas fa-plane-departure"></i> From</label>
+                            <input type="text" id="from" class="form-control" placeholder="City or Airport" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="to"><i class="fas fa-plane-arrival"></i> To</label>
+                            <input type="text" id="to" class="form-control" placeholder="City or Airport" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tripType"><i class="fas fa-exchange-alt"></i> Trip Type</label>
+                            <select id="tripType" class="form-control">
+                                <option value="round-trip">Round Trip</option>
+                                <option value="one-way">One Way</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="departure"><i class="fas fa-calendar-alt"></i> Departure</label>
+                            <input type="date" id="departure" class="form-control" required>
+                        </div>
+                        <div class="form-group return-date-group">
+                            <label for="return"><i class="fas fa-calendar-alt"></i> Return</label>
+                            <input type="date" id="return" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passengers"><i class="fas fa-user-friends"></i> Passengers</label>
+                            <select id="passengers" class="form-control" required>
+                                <option value="1">1 Adult</option>
+                                <option value="2">2 Adults</option>
+                                <option value="3">3 Adults</option>
+                                <option value="4">4 Adults</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="class"><i class="fas fa-chair"></i> Cabin Class</label>
+                            <select id="class" class="form-control" required>
+                                <option value="economy">Economy</option>
+                                <option value="premium">Premium Economy</option>
+                                <option value="business">Business</option>
+                                <option value="first">First Class</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary search-btn">Search Flights</button>
+                </form>
+            </div>
+        </div>
+
+        <section class="filter-section">
+            <div class="filter-card">
+                <div class="filter-bar">
+                    <div class="filter-group price-filter-group">
+                        <label><i class="fas fa-dollar-sign"></i> Price</label>
+                        <div class="price-labels">
+                            <span>Min</span>
+                            <span style="flex:1"></span>
+                            <span>Max</span>
+                        </div>
+                        <div class="price-inputs-row">
+                            <input type="number" id="priceMin" class="form-control price-input" min="0" max="5000"
+                                value="0" placeholder="Min">
+                            <span class="price-separator">-</span>
+                            <input type="number" id="priceMax" class="form-control price-input" min="0" max="5000"
+                                value="1000" placeholder="Max">
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="stops"><i class="fas fa-exchange-alt"></i> Stops</label>
+                        <select id="stops" class="form-control">
+                            <option value="all">All</option>
+                            <option value="0">Non-stop</option>
+                            <option value="1">1 Stop</option>
+                            <option value="2">2+ Stops</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="flight-results" id="flightResults">
+            <!-- Flight results will be dynamically added here -->
+        </div>
+        <script>
+            // Dual slider and input sync logic (single track, two handles)
+            const minInput = document.getElementById('priceMin');
+            const maxInput = document.getElementById('priceMax');
+            const minSlider = document.getElementById('priceRangeMin');
+            const maxSlider = document.getElementById('priceRangeMax');
+            const minGap = 10;
+            const maxVal = 5000;
+            function syncMin(val) {
+                if (parseInt(val) > parseInt(maxSlider.value) - minGap) {
+                    minSlider.value = maxSlider.value - minGap;
+                    minInput.value = maxSlider.value - minGap;
+                } else {
+                    minSlider.value = val;
+                }
+                updateSliderRange();
+            }
+            function syncMax(val) {
+                if (parseInt(val) < parseInt(minSlider.value) + minGap) {
+                    maxSlider.value = parseInt(minSlider.value) + minGap;
+                    maxInput.value = parseInt(minSlider.value) + minGap;
+                } else {
+                    maxSlider.value = val;
+                }
+                updateSliderRange();
+            }
+            function updateSliderRange() {
+                const range = document.querySelector('.slider-range');
+                const min = parseInt(minSlider.value);
+                const max = parseInt(maxSlider.value);
+                const percentMin = (min / maxVal) * 100;
+                const percentMax = (max / maxVal) * 100;
+                range.style.left = percentMin + '%';
+                range.style.width = (percentMax - percentMin) + '%';
+            }
+            minInput.addEventListener('input', e => {
+                syncMin(e.target.value);
+            });
+            maxInput.addEventListener('input', e => {
+                syncMax(e.target.value);
+            });
+            minSlider.addEventListener('input', e => {
+                syncMin(e.target.value);
+                minInput.value = minSlider.value;
+            });
+            maxSlider.addEventListener('input', e => {
+                syncMax(e.target.value);
+                maxInput.value = maxSlider.value;
+            });
+            updateSliderRange();
+        </script>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div id="searchModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <span class="modal-spinner"></span>
+            <p>Searching for flights...</p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/flight-search.js"></script>
+</body>
+
+</html>

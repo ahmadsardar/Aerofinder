@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Results - AeroFinder</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container nav-flex">
+            <div class="nav-left">
+                <a href="index.html" class="logo"><img src="images/logo.png" alt="AeroFinder Logo"
+                        style="height: 40px; vertical-align: middle;"> AeroFinder</a>
+            </div>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="search.html">Search Flights</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="chatbot.html">AI Assistant</a></li>
+                </ul>
+            </div>
+            <div class="nav-right auth-buttons"></div>
+        </nav>
+    </header>
+    <main>
+        <div class="results-header" style="padding-top: 5.5rem; max-width: 900px; margin: 0 auto;">
+            <h2>Flight Results</h2>
+            <div class="sort-options" style="margin-bottom: 1.5rem;">
+                <label for="sortSelect">Sort by:</label>
+                <select id="sortSelect" class="form-control"
+                    style="width: 200px; display: inline-block; margin-left: 0.5rem;">
+                    <option value="price-asc">Price (Low to High)</option>
+                    <option value="price-desc">Price (High to Low)</option>
+                    <option value="duration-asc">Travel Time (Shortest)</option>
+                    <option value="duration-desc">Travel Time (Longest)</option>
+                </select>
+                <label for="airlineFilter" style="margin-left: 1.5rem;">Airline:</label>
+                <select id="airlineFilter" class="form-control"
+                    style="width: 200px; display: inline-block; margin-left: 0.5rem;">
+                    <option value="all">All Airlines</option>
+                </select>
+            </div>
+        </div>
+        <section class="bookmarks-section" style="max-width: 900px; margin: 0 auto 2rem auto;">
+            <h3>My Bookmarked Flights</h3>
+            <div id="bookmarkedFlights"></div>
+        </section>
+        <div class="flight-results" id="flightResults"></div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <div id="bookModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <p id="bookModalMsg"></p>
+            <div style="margin-top: 1.5rem;">
+                <button id="continueToSkyscanner" class="btn btn-primary" style="margin-right: 1rem;">Continue to
+                    Booking</button>
+                <button id="cancelBookModal" class="btn btn-outline">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/results.js"></script>
+</body>
+
+</html>

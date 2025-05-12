@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroFinder - Find Your Perfect Flight</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom Auth Script -->
+    <script src="js/auth.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container nav-flex">
+            <div class="nav-left">
+                <a href="index.html" class="logo"><img src="images/logo.png" alt="AeroFinder Logo"
+                        style="height: 40px; vertical-align: middle;"> AeroFinder</a>
+            </div>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="search.html">Search Flights</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="chatbot.html">AI Assistant</a></li>
+                </ul>
+            </div>
+            <div class="nav-right auth-buttons">
+                <!-- Auth buttons will be dynamically updated -->
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Find Your Perfect Flight</h1>
+                <p>Search and compare flights from hundreds of airlines to find the best deals for your journey.</p>
+                <a href="search.html" class="btn btn-primary">Search Now</a>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="features-container">
+                <h2>Why Choose AeroFinder?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-search"></i>
+                        <h3>Smart Search</h3>
+                        <p>Find the best flight deals with our advanced search algorithm.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Real-time Updates</h3>
+                        <p>Get instant notifications about flight changes and deals.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Secure Booking</h3>
+                        <p>Book your flights with confidence using our secure platform.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-container">
+                <h2>Ready to Start Your Journey?</h2>
+                <p>Join thousands of travelers who trust AeroFinder for their flight bookings.</p>
+                <div class="cta-buttons">
+                    <a href="register.html" class="btn btn-secondary">Sign Up</a>
+                    <a href="search.html" class="btn btn-primary">Search Flights</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

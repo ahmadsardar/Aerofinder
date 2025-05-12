@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - AeroFinder</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom Auth Script -->
+    <script src="js/auth.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-container nav-flex">
+            <div class="nav-left">
+                <a href="index.html" class="logo"><img src="images/logo.png" alt="AeroFinder Logo"
+                        style="height: 40px; vertical-align: middle;"> AeroFinder</a>
+            </div>
+            <div class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="search.html">Search Flights</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="chatbot.html">AI Assistant</a></li>
+                </ul>
+            </div>
+            <div class="nav-right auth-buttons">
+                <!-- Auth buttons will be dynamically updated -->
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content-container">
+            <section class="content-section">
+                <h1>Terms of Service</h1>
+                <p>Last updated: March 15, 2024</p>
+
+                <div class="terms-section">
+                    <h2>1. Acceptance of Terms</h2>
+                    <p>By accessing and using AeroFinder's website and services, you agree to be bound by these Terms of
+                        Service and all applicable laws and regulations. If you do not agree with any of these terms,
+                        you are prohibited from using or accessing this site.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>2. Use License</h2>
+                    <p>Permission is granted to temporarily access the materials on AeroFinder's website for personal,
+                        non-commercial transitory viewing only. This is the grant of a license, not a transfer of title,
+                        and under this license you may not:</p>
+                    <ul>
+                        <li>Modify or copy the materials</li>
+                        <li>Use the materials for any commercial purpose</li>
+                        <li>Attempt to decompile or reverse engineer any software contained on the website</li>
+                        <li>Remove any copyright or other proprietary notations from the materials</li>
+                        <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>3. User Accounts</h2>
+                    <p>To access certain features of the website, you must register for an account. You agree to:</p>
+                    <ul>
+                        <li>Provide accurate and complete information</li>
+                        <li>Maintain the security of your account credentials</li>
+                        <li>Notify us immediately of any unauthorized access</li>
+                        <li>Accept responsibility for all activities under your account</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>4. Flight Bookings</h2>
+                    <p>When booking flights through AeroFinder:</p>
+                    <ul>
+                        <li>You must provide accurate passenger information</li>
+                        <li>You are responsible for verifying all booking details</li>
+                        <li>You agree to comply with airline terms and conditions</li>
+                        <li>You understand that prices and availability may change until booking is confirmed</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>5. Payment Terms</h2>
+                    <p>By making a booking, you agree to:</p>
+                    <ul>
+                        <li>Pay the full amount specified at the time of booking</li>
+                        <li>Provide valid payment information</li>
+                        <li>Accept any applicable fees and charges</li>
+                        <li>Comply with our refund and cancellation policies</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>6. Intellectual Property</h2>
+                    <p>The content on AeroFinder's website, including but not limited to text, graphics, logos, images,
+                        and software, is the property of AeroFinder and is protected by copyright and other intellectual
+                        property laws.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>7. Disclaimer</h2>
+                    <p>The materials on AeroFinder's website are provided on an 'as is' basis. AeroFinder makes no
+                        warranties, expressed or implied, and hereby disclaims and negates all other warranties
+                        including, without limitation:</p>
+                    <ul>
+                        <li>Implied warranties of merchantability</li>
+                        <li>Fitness for a particular purpose</li>
+                        <li>Non-infringement of intellectual property</li>
+                        <li>Accuracy of flight information</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h2>8. Limitations</h2>
+                    <p>In no event shall AeroFinder or its suppliers be liable for any damages (including, without
+                        limitation, damages for loss of data or profit, or due to business interruption) arising out of
+                        the use or inability to use the materials on AeroFinder's website.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>9. Revisions and Errata</h2>
+                    <p>The materials appearing on AeroFinder's website could include technical, typographical, or
+                        photographic errors. AeroFinder does not warrant that any of the materials on its website are
+                        accurate, complete, or current.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>10. Links</h2>
+                    <p>AeroFinder has not reviewed all of the sites linked to its website and is not responsible for the
+                        contents of any such linked site. The inclusion of any link does not imply endorsement by
+                        AeroFinder of the site.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>11. Modifications</h2>
+                    <p>AeroFinder may revise these terms of service at any time without notice. By using this website,
+                        you agree to be bound by the current version of these terms of service.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h2>12. Governing Law</h2>
+                    <p>These terms and conditions are governed by and construed in accordance with the laws of the
+                        United States and you irrevocably submit to the exclusive jurisdiction of the courts in that
+                        location.</p>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                    <a href="privacy.html" class="btn btn-secondary">View Privacy Policy</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
